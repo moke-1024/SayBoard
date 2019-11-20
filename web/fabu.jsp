@@ -15,8 +15,8 @@
 <body bgcolor="#FFFFFF" text="#000000">
 <table width="331" border="0" align="center">
   <tr>
-    <td height="34"><font size="4"><b> <a href="main.jsp">返回主页</a></b></font> &nbsp;
-      &nbsp; &nbsp; <a href="login.jsp"><b><font size="4"> 退出系统</font></b></a></td>
+    <td height="34"><font size="4"><b> <a href="<%=request.getContextPath()%>/main.jsp">返回主页</a></b></font> &nbsp;
+      &nbsp; &nbsp; <a href="<%=request.getContextPath()%>/LogoutServlet"><b><font size="4"> 退出系统</font></b></a></td>
   </tr>
   <tr>
     <td height="32" valign="bottom"><font size="4"><b>信息发送:</b></font></td>

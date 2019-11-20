@@ -16,8 +16,8 @@
 <p>&nbsp;</p>
 <table width="500" border="0" align="center">
   <tr>
-    <td height="34"><font size="4"><b> <a href="fabu.jsp">发布信息</a></b></font> &nbsp;
-      &nbsp; &nbsp; <a href="login.jsp"><b><font size="4"> 退出系统</font></b></a></td>
+    <td height="34"><font size="4"><b> <a href="<%=request.getContextPath()%>/fabu.jsp">发布信息</a></b></font> &nbsp;
+      &nbsp; &nbsp; <a href="<%=request.getContextPath()%>/LogoutServlet"><b><font size="4"> 退出系统</font></b></a></td>
   </tr><tr>
   <td height="32" valign="bottom"><font size="4"><b>留言信息:</b></font></td>
 </tr>

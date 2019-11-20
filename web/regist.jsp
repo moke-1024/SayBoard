@@ -17,7 +17,6 @@
               var canSub = true;
               canSub = this.checkNull("empName","用户名不能为空!") && canSub;
               canSub = this.checkNull("password","密码不能为空!")&& canSub;
-
                return canSub;
           },
           "checkNull":function(name,msg){
@@ -43,8 +42,6 @@
           });
       });
   </script>
-
-
 </head>
 
 <body bgcolor="#FFFFFF" text="#000000">
@@ -72,6 +69,7 @@
       <td colspan="2">
         <input type="submit" name="oper" value=" 注  册 ">
         <input type="reset" name="reset" value=" 复  位 ">
+        <a href="<%=request.getContextPath()%>/">跳出</a>
       </td>
     </tr>
   </table>
