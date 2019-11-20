@@ -29,7 +29,19 @@
               }
               return true;
           }
-      }
+      };
+      $(function () {
+          $("input[name='empName']").blur(function () {
+              var flag = formObj.checkNull("empName","用户名不能为空!");
+              var empName = $("input[name='empName']").val();
+              if (flag){
+                  $("#empName_span").load("<%=request.getContextPath()%>/AjaxCheckisNullServlet",{"empName":empName});
+              }
+          });
+          $("input[name='password']").blur(function () {
+              formObj.checkNull("password","密码不能为空!");
+          });
+      });
   </script>
 
 
@@ -46,7 +58,7 @@
       <td width="96" align="right">姓名:</td>
       <td width="154">
         <input type="text" name="empName" size="15">
-        <span></span>
+        <span id="empName_span"></span>
       </td>
     </tr>
     <tr>
