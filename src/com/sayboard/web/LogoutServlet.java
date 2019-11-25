@@ -1,4 +1,4 @@
-package com.sayboard.servlet;
+package com.sayboard.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

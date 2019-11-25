@@ -1,5 +1,8 @@
-package com.sayboard.servlet;
+package com.sayboard.web;
 
+import com.sayboard.domain.User;
+import com.sayboard.exception.MsgException;
+import com.sayboard.service.UserService;
 import com.sayboard.utils.JDBCUtil;
 import com.sayboard.utils.WebUtil;
 
@@ -39,7 +42,7 @@ public class RegistServlet extends HttpServlet {
             return;
         }
 
-        Connection conn = null;
+        /*Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -64,7 +67,19 @@ public class RegistServlet extends HttpServlet {
             e.printStackTrace();
         }finally {
             JDBCUtil.close(conn,ps,rs);
+        }*/
+
+        UserService userService = new UserService();
+        User user = new User(0, empName, password);
+        try {
+            userService.registUser(user);
+        }catch (MsgException e){
+            request.setAttribute("msg",e.getMessage());
+            request.getRequestDispatcher("/regist.jsp").forward(request,response);
+            return;
         }
+
+
 
         response.getWriter().write("<h1 align='center'>" + "<font color='red'>恭喜,注册成功! 3秒之后跳转到登入页..</font>" + "</h1>");
         response.setHeader("refresh","3;url=http://www.sayboard.com");

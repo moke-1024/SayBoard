@@ -1,4 +1,4 @@
-package com.sayboard.servlet;
+package com.sayboard.web;
 
 import com.sayboard.utils.JDBCUtil;
 
@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,42 +17,34 @@ import java.sql.SQLException;
  * @outhor moke
  * @date 2019-11-20
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/AjaxCheckisNullServlet")
+public class AjaxCheckisNullServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
 
-        String empName = request.getParameter("empName");
-        String password = request.getParameter("password");
+        String username = request.getParameter("empName");
         Connection conn = null;
         PreparedStatement ps = null;
-        ResultSet rs =null;
+        ResultSet rs = null;
         try {
             conn = JDBCUtil.getConnection();
-            ps = conn.prepareStatement("select * from user where empName = ? and password = ?");
-            ps.setString(1,empName);
-            ps.setString(2,password);
+            ps = conn.prepareStatement("select * from user where empName = ?");
+            ps.setString(1,username);
             rs = ps.executeQuery();
             if (rs.next()){
-                HttpSession session = request.getSession();
-                session.setAttribute("empName",empName);
+                response.getWriter().write("<font color='red'>用户名已存在！</font>");
             }else {
-                request.setAttribute("msg","用户名或密码错误！");
-                request.getRequestDispatcher("login.jsp").forward(request,response);
-                return;
+                response.getWriter().write("<font color='green'>用户名可以使用！</font>");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }finally {
             JDBCUtil.close(conn,ps,rs);
         }
-
-        response.sendRedirect(request.getContextPath()+"/main.jsp");
-
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
