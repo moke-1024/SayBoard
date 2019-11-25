@@ -1,6 +1,6 @@
 package com.sayboard.servlet;
 
-import com.sayboard.utils.JBDCUtil;
+import com.sayboard.utils.JDBCUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,12 +27,11 @@ public class LoginServlet extends HttpServlet {
 
         String empName = request.getParameter("empName");
         String password = request.getParameter("password");
-
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs =null;
         try {
-            conn = JBDCUtil.getConnection();
+            conn = JDBCUtil.getConnection();
             ps = conn.prepareStatement("select * from user where empName = ? and password = ?");
             ps.setString(1,empName);
             ps.setString(2,password);
@@ -48,7 +47,7 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            JBDCUtil.close(conn,ps,rs);
+            JDBCUtil.close(conn,ps,rs);
         }
 
         response.sendRedirect(request.getContextPath()+"/main.jsp");

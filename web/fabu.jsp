@@ -15,13 +15,13 @@
 <body bgcolor="#FFFFFF" text="#000000">
 <table width="331" border="0" align="center">
   <tr>
-    <td height="34"><font size="4"><b> <a href="<%=request.getContextPath()%>/main.jsp">返回主页</a></b></font> &nbsp;
-      &nbsp; &nbsp; <a href="<%=request.getContextPath()%>/LogoutServlet"><b><font size="4"> 退出系统</font></b></a></td>
+    <td height="34"><font size="4"><b> <a href="${pageContext.request.contextPath}/main.jsp">返回主页</a></b></font> &nbsp;
+      &nbsp; &nbsp; <a href="${pageContext.request.contextPath}/LogoutServlet"><b><font size="4"> 退出系统</font></b></a></td>
   </tr>
   <tr>
     <td height="32" valign="bottom"><font size="4"><b>信息发送:</b></font></td>
   </tr>
-  <form action="main.jsp">
+  <form action="${pageContext.request.contextPath}/main.jsp">
     <tr>
       <td>
         <table width="308" border="1" bordercolor="#3399cc" cellspacing="1">

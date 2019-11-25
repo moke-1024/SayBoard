@@ -16,11 +16,14 @@
 <p>&nbsp;</p>
 <table width="500" border="0" align="center">
   <tr>
-    <td height="34"><font size="4"><b> <a href="<%=request.getContextPath()%>/fabu.jsp">发布信息</a></b></font> &nbsp;
-      &nbsp; &nbsp; <a href="<%=request.getContextPath()%>/LogoutServlet"><b><font size="4"> 退出系统</font></b></a></td>
-  </tr><tr>
-  <td height="32" valign="bottom"><font size="4"><b>留言信息:</b></font></td>
-</tr>
+    <td height="34">
+      <font size="4"><b><a href="${pageContext.request.contextPath}/fabu.jsp">发布信息</a></b></font> &nbsp;
+      &nbsp; &nbsp; <a href="${pageContext.request.contextPath}/LogoutServlet"><b><font size="4"> 退出系统</font></b></a>
+    </td>
+  </tr>
+  <tr>
+    <td height="32" valign="bottom"><font size="4"><b>留言信息:</b></font></td>
+  </tr>
 
   <tr>
     <td>
@@ -30,28 +33,30 @@
           <td width="95" align="center">发送时间</td>
           <td width="65">接收人</td>
           <td width="230">信息内容</td>
-          <td>&nbsp;</td>
+          <td width="40">删除</td>
         </tr>
         <tr>
           <td align="center">周兴池</td>
           <td align="center">2005-01-23</td>
           <td align="center">所有人</td>
           <td >今晚不加班,一起去Happy!</td>
-          <td><a href="main.htm"><img src="trash.gif"></img></a></td>
+          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp"><img src="${pageContext.request.contextPath}/trash.gif"></img></a></td>
         </tr>
         <tr>
           <td align="center">林轻侠</td>
           <td align="center">2005-01-24</td>
           <td align="center">张三丰</td>
           <td >发薪水啦, 快还钱!</td>
-          <td><a href="main.htm"><img src="trash.gif"></img></a></td>
+          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp"><img src="${pageContext.request.contextPath}/trash.gif"></img></a></td>
         </tr>
         <tr>
           <td align="center">李逍遥</td>
           <td align="center">2005-01-26</td>
           <td align="center">张三丰</td>
           <td >今晚8点半野猪林,不见不散!</td>
-          <td><a href="main.htm"><img src="trash.gif"></img></a></td>
+          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp">
+            <img src="${pageContext.request.contextPath}/trash.gif"></img>
+          </a></td>
         </tr>
       </table>
       <p>&nbsp;</p>

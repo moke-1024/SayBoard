@@ -1,6 +1,6 @@
 package com.sayboard.servlet;
 
-import com.sayboard.utils.JBDCUtil;
+import com.sayboard.utils.JDBCUtil;
 import com.sayboard.utils.WebUtil;
 
 import javax.servlet.ServletException;
@@ -44,7 +44,7 @@ public class RegistServlet extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            conn =  JBDCUtil.getConnection();
+            conn =  JDBCUtil.getConnection();
             ps = conn.prepareStatement("select * from user where empName = ?");
             ps.setString(1,empName);
             rs = ps.executeQuery();
@@ -63,7 +63,7 @@ public class RegistServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            JBDCUtil.close(conn,ps,rs);
+            JDBCUtil.close(conn,ps,rs);
         }
 
         response.getWriter().write("<h1 align='center'>" + "<font color='red'>恭喜,注册成功! 3秒之后跳转到登入页..</font>" + "</h1>");

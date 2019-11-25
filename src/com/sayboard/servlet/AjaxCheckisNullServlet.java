@@ -1,6 +1,6 @@
 package com.sayboard.servlet;
 
-import com.sayboard.utils.JBDCUtil;
+import com.sayboard.utils.JDBCUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +29,7 @@ public class AjaxCheckisNullServlet extends HttpServlet {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = JBDCUtil.getConnection();
+            conn = JDBCUtil.getConnection();
             ps = conn.prepareStatement("select * from user where empName = ?");
             ps.setString(1,username);
             rs = ps.executeQuery();
@@ -42,7 +42,7 @@ public class AjaxCheckisNullServlet extends HttpServlet {
             e.printStackTrace();
             throw new RuntimeException();
         }finally {
-            JBDCUtil.close(conn,ps,rs);
+            JDBCUtil.close(conn,ps,rs);
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
