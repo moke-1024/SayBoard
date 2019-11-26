@@ -2,10 +2,13 @@ package com.sayboard.dao;
 
 import com.sayboard.domain.Mage;
 import com.sayboard.utils.JDBCUtil;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * @outhor moke
@@ -22,7 +25,6 @@ public class MageDao {
             ps.setString(2, mage.getTime());
             ps.setString(3, mage.getAcceptname());
             ps.setString(4, mage.getSay());
-
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,4 +33,32 @@ public class MageDao {
             JDBCUtil.close(conn,ps,null);
         }
     }
+
+    public ArrayList<Mage> selectMage() {
+        ArrayList<Mage> mages = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = JDBCUtil.getConnection();
+            ps = conn.prepareStatement("select * from mage");
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Mage mage = new Mage();
+                mage.setId(rs.getInt(1));
+                mage.setSendname(rs.getString(2));
+                mage.setTime(rs.getString(3));
+                mage.setAcceptname(rs.getString(4));
+                mage.setSay(rs.getString(5));
+                mages.add(mage);
+            }
+            return mages;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            JDBCUtil.close(conn,ps,null);
+        }
+    }
+
 }

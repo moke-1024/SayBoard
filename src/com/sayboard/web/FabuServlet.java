@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @WebServlet("/FabuServlet")
@@ -32,7 +33,10 @@ public class FabuServlet extends HttpServlet {
         Mage mage = new Mage(0,sendname,time,acceptname,say);
         session.setAttribute("mage",mage);
         mageService.fabuMage(mage);
-        mageService.queryMage();
+
+        ArrayList<Mage> mages = mageService.xianshiMag();;
+        HttpSession session1 = request.getSession();
+        session1.setAttribute("mages",mages);
 
         response.sendRedirect(request.getContextPath()+"/main.jsp");
 

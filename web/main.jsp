@@ -1,4 +1,6 @@
-<%@ page import="com.sayboard.domain.Mage" %><%--
+<%@ page import="com.sayboard.domain.Mage" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2019/11/19
@@ -36,44 +38,27 @@
           <td width="230">信息内容</td>
           <td width="40">删除</td>
         </tr>
-        <tr>
-          <td align="center">周兴池</td>
-          <td align="center">2005-01-23</td>
-          <td align="center">所有人</td>
-          <td >今晚不加班,一起去Happy!</td>
-          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp">
-            <img src="${pageContext.request.contextPath}/trash.gif"></img></a></td>
-        </tr>
-        <tr>
-          <td align="center">林轻侠</td>
-          <td align="center">2005-01-24</td>
-          <td align="center">张三丰</td>
-          <td >发薪水啦, 快还钱!</td>
-          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp"><img src="${pageContext.request.contextPath}/trash.gif"></img></a></td>
-        </tr>
-
-        <tr>
-          <td align="center">李逍遥</td>
-          <td align="center">2005-01-26</td>
-          <td align="center">张三丰</td>
-          <td >今晚8点半野猪林,不见不散!</td>
-          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp">
-            <img src="${pageContext.request.contextPath}/trash.gif"></img>
-          </a></td>
-        </tr>
         <%
-           Mage mage = new Mage();
-           pageContext.setAttribute("mage",mage);
+           ArrayList<Mage> mages = new ArrayList();
+           mages = (ArrayList) session.getAttribute("mages");
+           if (mages != null){
+               Iterator<Mage> mage = mages.iterator();
+               while (mage.hasNext()){
+                   Mage ms = mage.next();
         %>
         <tr>
-          <td align="center">${mage.sendname}</td>
-          <td align="center">${mage.time}</td>
-          <td align="center">${mage.acceptname}</td>
-          <td >${mage.say}</td>
+          <td align="center"><%= ms.getSendname().toString()%></td>
+          <td align="center"><%= ms.getTime().toString() %></td>
+          <td align="center"><%= ms.getAcceptname()%></td>
+          <td ><%= ms.getSay()%></td>
           <td align="center"><a href="${pageContext.request.contextPath}/main.jsp">
-            <img src="${pageContext.request.contextPath}/trash.gif"></img>
+            <img src="${pageContext.request.contextPath}/trash.gif" name="<%=ms.getId()%>"></img>
           </a></td>
         </tr>
+          <%
+              }
+           }
+          %>
 
       </table>
       <p>&nbsp;</p>

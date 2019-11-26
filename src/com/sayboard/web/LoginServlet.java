@@ -1,7 +1,9 @@
 package com.sayboard.web;
 
+import com.sayboard.domain.Mage;
 import com.sayboard.domain.User;
 import com.sayboard.exception.MsgException;
+import com.sayboard.service.MageService;
 import com.sayboard.service.UserService;
 import com.sayboard.utils.JDBCUtil;
 
@@ -16,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * @outhor moke
@@ -38,6 +41,10 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/login.jsp").forward(request,response);
             return;
         }
+        MageService mageService = new MageService();
+        ArrayList<Mage> mages = mageService.xianshiMag();;
+        HttpSession session1 = request.getSession();
+        session1.setAttribute("mages",mages);
 
         response.sendRedirect(request.getContextPath()+"/main.jsp");
 

@@ -3,6 +3,8 @@ package com.sayboard.service;
 import com.sayboard.dao.MageDao;
 import com.sayboard.domain.Mage;
 
+import java.util.ArrayList;
+
 /**
  * @outhor moke
  * @date 2019-11-26
@@ -14,7 +16,8 @@ public class MageService {
         mageDao.addMage(mage);
     }
 
-    public void queryMage() {
 
+    public ArrayList<Mage> xianshiMag() {
+        return mageDao.selectMage();
     }
 }
