@@ -25,9 +25,6 @@ import java.sql.SQLException;
 public class RegistServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
-
         String empName = request.getParameter("empName");
         String password = request.getParameter("password");
 
@@ -42,33 +39,6 @@ public class RegistServlet extends HttpServlet {
             return;
         }
 
-        /*Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
-            conn =  JDBCUtil.getConnection();
-            ps = conn.prepareStatement("select * from user where empName = ?");
-            ps.setString(1,empName);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                request.setAttribute("msg","用户名已存在");
-                request.getRequestDispatcher("/regist.jsp").forward(request,response);
-                return;
-            }else{
-                ps = conn.prepareStatement("insert into user values(null,?,?)");
-
-                ps.setString(1,empName);
-                ps.setString(2,password);
-                ps.executeUpdate();
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            JDBCUtil.close(conn,ps,rs);
-        }*/
-
         UserService userService = new UserService();
         User user = new User(0, empName, password);
         try {
@@ -78,8 +48,6 @@ public class RegistServlet extends HttpServlet {
             request.getRequestDispatcher("/regist.jsp").forward(request,response);
             return;
         }
-
-
 
         response.getWriter().write("<h1 align='center'>" + "<font color='red'>恭喜,注册成功! 3秒之后跳转到登入页..</font>" + "</h1>");
         response.setHeader("refresh","3;url=http://www.sayboard.com");

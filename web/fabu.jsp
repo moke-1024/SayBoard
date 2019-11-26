@@ -21,7 +21,7 @@
   <tr>
     <td height="32" valign="bottom"><font size="4"><b>信息发送:</b></font></td>
   </tr>
-  <form action="${pageContext.request.contextPath}/main.jsp">
+  <form action="${pageContext.request.contextPath}/FabuServlet" method="post">
     <tr>
       <td>
         <table width="308" border="1" bordercolor="#3399cc" cellspacing="1">

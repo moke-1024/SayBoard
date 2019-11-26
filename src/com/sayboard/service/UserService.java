@@ -27,4 +27,8 @@ public class UserService {
             userDao.addUser(user);
         }
     }
+
+    public boolean checkisnullUser(User user) {
+        return userDao.findUserByUsername(user.getEmpName());
+    }
 }

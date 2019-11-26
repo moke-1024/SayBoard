@@ -1,5 +1,8 @@
 package com.sayboard.web;
 
+import com.sayboard.domain.User;
+import com.sayboard.exception.MsgException;
+import com.sayboard.service.UserService;
 import com.sayboard.utils.JDBCUtil;
 
 import javax.servlet.ServletException;
@@ -21,28 +24,15 @@ import java.sql.SQLException;
 public class AjaxCheckisNullServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
+        String empName = request.getParameter("empName");
+        String password = request.getParameter("password");
 
-        String username = request.getParameter("empName");
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            conn = JDBCUtil.getConnection();
-            ps = conn.prepareStatement("select * from user where empName = ?");
-            ps.setString(1,username);
-            rs = ps.executeQuery();
-            if (rs.next()){
-                response.getWriter().write("<font color='red'>用户名已存在！</font>");
-            }else {
-                response.getWriter().write("<font color='green'>用户名可以使用！</font>");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }finally {
-            JDBCUtil.close(conn,ps,rs);
+        UserService userService = new UserService();
+        User user = new User(0, empName, password);
+        if (userService.checkisnullUser(user)){
+            response.getWriter().write("<font color='red'>用户名已存在！</font>");
+        }else {
+            response.getWriter().write("<font color='green'>用户名可以使用！</font>");
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

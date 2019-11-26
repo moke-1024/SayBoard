@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.sayboard.domain.Mage" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2019/11/19
@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
   <title>主页面</title>
@@ -40,7 +41,8 @@
           <td align="center">2005-01-23</td>
           <td align="center">所有人</td>
           <td >今晚不加班,一起去Happy!</td>
-          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp"><img src="${pageContext.request.contextPath}/trash.gif"></img></a></td>
+          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp">
+            <img src="${pageContext.request.contextPath}/trash.gif"></img></a></td>
         </tr>
         <tr>
           <td align="center">林轻侠</td>
@@ -49,6 +51,7 @@
           <td >发薪水啦, 快还钱!</td>
           <td align="center"><a href="${pageContext.request.contextPath}/main.jsp"><img src="${pageContext.request.contextPath}/trash.gif"></img></a></td>
         </tr>
+
         <tr>
           <td align="center">李逍遥</td>
           <td align="center">2005-01-26</td>
@@ -58,6 +61,20 @@
             <img src="${pageContext.request.contextPath}/trash.gif"></img>
           </a></td>
         </tr>
+        <%
+           Mage mage = new Mage();
+           pageContext.setAttribute("mage",mage);
+        %>
+        <tr>
+          <td align="center">${mage.sendname}</td>
+          <td align="center">${mage.time}</td>
+          <td align="center">${mage.acceptname}</td>
+          <td >${mage.say}</td>
+          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp">
+            <img src="${pageContext.request.contextPath}/trash.gif"></img>
+          </a></td>
+        </tr>
+
       </table>
       <p>&nbsp;</p>
     </td>
