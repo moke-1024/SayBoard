@@ -5,7 +5,6 @@ import com.sayboard.domain.User;
 import com.sayboard.exception.MsgException;
 import com.sayboard.service.MageService;
 import com.sayboard.service.UserService;
-import com.sayboard.utils.JDBCUtil;
 import com.sayboard.utils.MD5Util;
 
 import javax.servlet.ServletException;
@@ -15,11 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @outhor moke
@@ -43,15 +38,11 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        String userName = empName;
+
         HttpSession session = request.getSession();
         MageService mageService = new MageService();
-        ArrayList<Mage> mages = mageService.xianshiByNameMag(userName);
+        List<Mage> mages = mageService.xianshiByNameMag(empName);
         session.setAttribute("mages",mages);
-
-        String allname = "所有人";
-        ArrayList<Mage> mages1 = mageService.xianshiByNameMag(allname);
-        session.setAttribute("mages1",mages1);
 
         response.sendRedirect(request.getContextPath()+"/main.jsp");
 

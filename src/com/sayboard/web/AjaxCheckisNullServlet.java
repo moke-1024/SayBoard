@@ -25,15 +25,25 @@ public class AjaxCheckisNullServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String empName = request.getParameter("empName");
-        String password = request.getParameter("password");
+        String textfield = request.getParameter("textfield");
+        System.out.println(empName);
+
 
         UserService userService = new UserService();
-        User user = new User(0, empName, password);
-        if (userService.checkisnullUser(user)){
-            response.getWriter().write("<font color='red'>用户名已存在！</font>");
+        if (empName != null){
+            if (userService.checkisnullUser(empName)){
+                response.getWriter().write("<font color='red'>用户名已存在！</font>");
+            }else {
+                response.getWriter().write("<font color='green'>用户名可以使用！</font>");
+            }
         }else {
-            response.getWriter().write("<font color='green'>用户名可以使用！</font>");
+            if (userService.checkisnullUser(textfield)){
+                response.getWriter().write("<font color='green'>接收人已注册</font>");
+            }else {
+                response.getWriter().write("<font color='red'>接收人未注册</font>");
+            }
         }
+
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

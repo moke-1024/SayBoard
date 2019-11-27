@@ -10,6 +10,32 @@
 <head>
   <title>发布页面</title>
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.4.2.js"></script>
+    <script type="text/javascript">
+        var formObj={
+            "fcheckData":function(){
+                return this.fcheckNull("textfield","接收人不能为空");
+            },
+            "fcheckNull":function(name,msg1){
+                var tag = $("input[name='"+name+"']").val();
+                $("input[name='"+name+"']").nextAll("span").text("");
+                if(tag == ""){
+                    $("input[name='"+name+"']").nextAll("span").text(msg1);
+                    return false;
+                }
+                return true;
+            }
+        };
+        $(function () {
+            $("input[name='textfield']").blur(function () {
+                var flag = formObj.fcheckNull("textfield","接收人不能为空");
+                var textfield = $("input[name='textfield']").val();
+                if (flag){
+                    $("#textfield_span").load("${pageContext.request.contextPath}/AjaxCheckisNullServlet",{"textfield":textfield});
+                }
+            });
+        });
+    </script>
 </head>
 
 <body bgcolor="#FFFFFF" text="#000000">
@@ -24,19 +50,20 @@
   <tr>
     <td height="32" valign="bottom"><font size="4"><b>信息发送:</b></font></td>
   </tr>
-  <form action="${pageContext.request.contextPath}/FabuServlet" method="post">
+  <form action="${pageContext.request.contextPath}/FabuServlet" method="post" onsubmit="return formObj.fcheckData()">
     <tr>
       <td>
-        <table width="308" border="1" bordercolor="#3399cc" cellspacing="1">
+        <table width="290" border="1" bordercolor="#3399cc" cellspacing="1">
           <tr>
             <td width="86" align="right">接收人:</td>
-            <td width="209">
+            <td width="180">
               <input type="text" name="textfield">
+                <span id="textfield_span"></span>
             </td>
           </tr>
           <tr valign="top">
             <td width="86" align="right">信息内容:</td>
-            <td width="209">
+            <td width="180">
               <textarea name="textfield2"></textarea>
             </td>
           </tr>

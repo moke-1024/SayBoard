@@ -46,7 +46,7 @@
 
 <body bgcolor="#FFFFFF" text="#000000">
 <p>&nbsp;</p>
-<form action="${pageContext.request.contextPath}/RegistServlet" method="post" onsubmit=" return formObj.checkData()">
+<form action="${pageContext.request.contextPath}/RegistServlet" method="post" onsubmit="return formObj.checkData()">
   <table width="258" border="1" align="center" cellspacing="1" bordercolor="#3399CC">
     <tr align="center">
       <td colspan="2" height="59">

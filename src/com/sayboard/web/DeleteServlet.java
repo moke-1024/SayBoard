@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @outhor moke
@@ -28,17 +28,9 @@ public class DeleteServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        String sendname =user.getEmpName();
 
-
-        String userName = sendname;
-
-        ArrayList<Mage> mages = mageService.xianshiByNameMag(userName);
+        List<Mage> mages = mageService.xianshiByNameMag(user.getEmpName());
         session.setAttribute("mages",mages);
-
-        String allname = "所有人";
-        ArrayList<Mage> mages1 = mageService.xianshiByNameMag(allname);
-        session.setAttribute("mages1",mages1);
 
         response.sendRedirect(request.getContextPath()+"/main.jsp");
 

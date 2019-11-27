@@ -28,7 +28,16 @@ public class UserService {
         }
     }
 
-    public boolean checkisnullUser(User user) {
-        return userDao.findUserByUsername(user.getEmpName());
+    public boolean checkisnullUser(String empName) {
+        return userDao.findUserByUsername(empName);
+    }
+
+    public boolean findacceptUser(String acceptname) {
+        boolean flag = userDao.findUserByUsername(acceptname);
+        if (flag){
+            return true;
+        }else {
+            throw new MsgException("此用户未注册");
+        }
     }
 }

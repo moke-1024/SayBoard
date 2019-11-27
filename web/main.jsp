@@ -1,6 +1,5 @@
-<%@ page import="com.sayboard.domain.Mage" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2019/11/19
@@ -8,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <html>
 <head>
   <title>主页面</title>
@@ -17,7 +16,7 @@
 
 <body bgcolor="#FFFFFF" text="#000000">
 <p>&nbsp;</p>
-<table width="500" border="0" align="center">
+<table width="550" border="0" align="center">
   <tr>
     <td height="34">
       <font size="4"><b><a href="${pageContext.request.contextPath}/fabu.jsp">发布信息</a></b></font> &nbsp;
@@ -35,70 +34,28 @@
           <td width="65">发送人</td>
           <td width="95" align="center">发送时间</td>
           <td width="65">接收人</td>
-          <td width="230">信息内容</td>
+          <td width="300">信息内容</td>
           <td width="40">删除</td>
         </tr>
         <%
-          ArrayList<Mage> mages1 = new ArrayList();
-          mages1 = (ArrayList) session.getAttribute("mages1");
-          if (mages1 != null){
-            Iterator<Mage> mage = mages1.iterator();
-            while (mage.hasNext()){
-              Mage ms = mage.next();
+           List mages = (List) session.getAttribute("mages");
+           pageContext.setAttribute("mages",mages);
         %>
+          <c:forEach items="${mages}" var="ms">
+              <tr>
+                  <td align="center">${ms.sendname}</td>
+                  <td align="center">${ms.time}</td>
+                  <td align="center">${ms.acceptname}</td>
+                  <td >${ms.say}</td>
+                  <td align="center">
+                      <a href="${pageContext.request.contextPath}/DeleteServlet?id=${ms.id}">
+                          <img src="${pageContext.request.contextPath}/trash.gif">
+                          <${pageContext.request.contextPath}/img>
+                      </a>
+                  </td>
+              </tr>
+          </c:forEach>
 
-        <tr>
-          <td align="center"><%= ms.getSendname()%></td>
-          <td align="center"><%= ms.getTime() %></td>
-          <td align="center"><%= ms.getAcceptname()%></td>
-          <td ><%= ms.getSay()%></td>
-          <td align="center">
-            <a href="${pageContext.request.contextPath}/DeleteServlet?id=<%= ms.getId()%>">
-              <img src="${pageContext.request.contextPath}/trash.gif">
-              <${pageContext.request.contextPath}/img>
-            </a>
-          </td>
-        </tr>
-        <%
-            }
-          }
-        %>
-
-        <%
-           ArrayList<Mage> mages = new ArrayList();
-           mages = (ArrayList) session.getAttribute("mages");
-           if (mages != null){
-               Iterator<Mage> mage = mages.iterator();
-               while (mage.hasNext()){
-                   Mage ms = mage.next();
-        %>
-        <tr>
-          <td align="center"><%= ms.getSendname()%></td>
-          <td align="center"><%= ms.getTime() %></td>
-          <td align="center"><%= ms.getAcceptname()%></td>
-          <td ><%= ms.getSay()%></td>
-          <td align="center">
-            <a href="${pageContext.request.contextPath}/DeleteServlet?id=<%= ms.getId()%>">
-            <img src="${pageContext.request.contextPath}/trash.gif">
-            <${pageContext.request.contextPath}/img>
-            </a>
-          </td>
-        </tr>
-          <%
-              }
-           }
-          %>
-
-      </table>
-      <p>&nbsp;</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>&nbsp;</p>
-    </td>
-  </tr>
-</table>
 </body>
 </html>
 
