@@ -13,11 +13,21 @@ public class MageService {
     MageDao mageDao = new MageDao();
 
     public void fabuMage(Mage mage) {
+
         mageDao.addMage(mage);
     }
 
-
     public ArrayList<Mage> xianshiMag() {
+
         return mageDao.selectMage();
+    }
+
+
+    public void deleteMage(int deleteid) {
+        mageDao.delMage(deleteid);
+    }
+
+    public ArrayList<Mage> xianshiByNameMag(String userName) {
+        return mageDao.selectByNameMage(userName);
     }
 }

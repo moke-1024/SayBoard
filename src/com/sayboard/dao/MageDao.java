@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @date 2019-11-26
  */
 public class MageDao {
+
     public void addMage(Mage mage) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -61,4 +62,47 @@ public class MageDao {
         }
     }
 
+    public void delMage(int deleteid) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = JDBCUtil.getConnection();
+            ps = conn.prepareStatement("delete from mage where id = ?");
+            ps.setInt(1, deleteid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtil.close(conn,ps,rs);
+        }
+    }
+
+    public ArrayList<Mage> selectByNameMage(String userName) {
+        ArrayList<Mage> mages = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = JDBCUtil.getConnection();
+            ps = conn.prepareStatement("select * from mage where acceptname = ?");
+            ps.setString(1,userName);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Mage mage = new Mage();
+                mage.setId(rs.getInt(1));
+                mage.setSendname(rs.getString(2));
+                mage.setTime(rs.getString(3));
+                mage.setAcceptname(rs.getString(4));
+                mage.setSay(rs.getString(5));
+                mages.add(mage);
+            }
+            return mages;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            JDBCUtil.close(conn,ps,null);
+        }
+    }
 }

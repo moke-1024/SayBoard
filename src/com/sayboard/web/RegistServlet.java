@@ -4,6 +4,7 @@ import com.sayboard.domain.User;
 import com.sayboard.exception.MsgException;
 import com.sayboard.service.UserService;
 import com.sayboard.utils.JDBCUtil;
+import com.sayboard.utils.MD5Util;
 import com.sayboard.utils.WebUtil;
 
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public class RegistServlet extends HttpServlet {
         }
 
         UserService userService = new UserService();
-        User user = new User(0, empName, password);
+        User user = new User(0, empName, MD5Util.md5(password));
         try {
             userService.registUser(user);
         }catch (MsgException e){

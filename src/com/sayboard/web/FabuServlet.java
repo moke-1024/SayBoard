@@ -19,7 +19,6 @@ public class FabuServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         String sendname =user.getEmpName();
-        System.out.println(sendname);
 
         Date date = new Date() ;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -34,9 +33,15 @@ public class FabuServlet extends HttpServlet {
         session.setAttribute("mage",mage);
         mageService.fabuMage(mage);
 
-        ArrayList<Mage> mages = mageService.xianshiMag();;
-        HttpSession session1 = request.getSession();
-        session1.setAttribute("mages",mages);
+
+        String userName = sendname;
+
+        ArrayList<Mage> mages = mageService.xianshiByNameMag(userName);
+        session.setAttribute("mages",mages);
+
+        String allname = "所有人";
+        ArrayList<Mage> mages1 = mageService.xianshiByNameMag(allname);
+        session.setAttribute("mages1",mages1);
 
         response.sendRedirect(request.getContextPath()+"/main.jsp");
 

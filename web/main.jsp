@@ -39,6 +39,32 @@
           <td width="40">删除</td>
         </tr>
         <%
+          ArrayList<Mage> mages1 = new ArrayList();
+          mages1 = (ArrayList) session.getAttribute("mages1");
+          if (mages1 != null){
+            Iterator<Mage> mage = mages1.iterator();
+            while (mage.hasNext()){
+              Mage ms = mage.next();
+        %>
+
+        <tr>
+          <td align="center"><%= ms.getSendname()%></td>
+          <td align="center"><%= ms.getTime() %></td>
+          <td align="center"><%= ms.getAcceptname()%></td>
+          <td ><%= ms.getSay()%></td>
+          <td align="center">
+            <a href="${pageContext.request.contextPath}/DeleteServlet?id=<%= ms.getId()%>">
+              <img src="${pageContext.request.contextPath}/trash.gif">
+              <${pageContext.request.contextPath}/img>
+            </a>
+          </td>
+        </tr>
+        <%
+            }
+          }
+        %>
+
+        <%
            ArrayList<Mage> mages = new ArrayList();
            mages = (ArrayList) session.getAttribute("mages");
            if (mages != null){
@@ -47,13 +73,16 @@
                    Mage ms = mage.next();
         %>
         <tr>
-          <td align="center"><%= ms.getSendname().toString()%></td>
-          <td align="center"><%= ms.getTime().toString() %></td>
+          <td align="center"><%= ms.getSendname()%></td>
+          <td align="center"><%= ms.getTime() %></td>
           <td align="center"><%= ms.getAcceptname()%></td>
           <td ><%= ms.getSay()%></td>
-          <td align="center"><a href="${pageContext.request.contextPath}/main.jsp">
-            <img src="${pageContext.request.contextPath}/trash.gif" name="<%=ms.getId()%>"></img>
-          </a></td>
+          <td align="center">
+            <a href="${pageContext.request.contextPath}/DeleteServlet?id=<%= ms.getId()%>">
+            <img src="${pageContext.request.contextPath}/trash.gif">
+            <${pageContext.request.contextPath}/img>
+            </a>
+          </td>
         </tr>
           <%
               }
