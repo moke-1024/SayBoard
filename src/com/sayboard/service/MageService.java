@@ -18,7 +18,7 @@ public class MageService {
         if (flag){
             mageDao.addMage(mage);
         }else {
-            throw new MsgException("此户名未注册");
+            throw new MsgException("此人未注册！！！");
         }
     }
 

@@ -32,7 +32,7 @@
       <table width="100%" border="1" bordercolor="#3399CC" cellspacing="1">
         <tr align="center">
           <td width="65">发送人</td>
-          <td width="95" align="center">发送时间</td>
+          <td width="105" align="center">发送时间</td>
           <td width="65">接收人</td>
           <td width="300">信息内容</td>
           <td width="40">删除</td>

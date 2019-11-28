@@ -37,10 +37,8 @@ public class AjaxCheckisNullServlet extends HttpServlet {
                 response.getWriter().write("<font color='green'>用户名可以使用！</font>");
             }
         }else {
-            if (userService.checkisnullUser(textfield)){
-                response.getWriter().write("<font color='green'>接收人已注册</font>");
-            }else {
-                response.getWriter().write("<font color='red'>接收人未注册</font>");
+            if (!userService.checkisnullUser(textfield)) {
+                response.getWriter().write("<font color='red'>此人未注册！！！</font>");
             }
         }
 

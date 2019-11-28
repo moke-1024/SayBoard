@@ -62,7 +62,7 @@ public class MageDao {
             conn = JDBCUtil.getConnection();
             ps = conn.prepareStatement("select * from mage where acceptname = ? or acceptname = ? ");
             ps.setString(1,userName);
-           ps.setString(2,allname);
+            ps.setString(2,allname);
             rs = ps.executeQuery();
             while (rs.next()){
                 Mage mage = new Mage();

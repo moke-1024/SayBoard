@@ -53,17 +53,17 @@
   <form action="${pageContext.request.contextPath}/FabuServlet" method="post" onsubmit="return formObj.fcheckData()">
     <tr>
       <td>
-        <table width="290" border="1" bordercolor="#3399cc" cellspacing="1">
+        <table width="280" border="1" bordercolor="#3399cc" cellspacing="1">
           <tr>
             <td width="86" align="right">接收人:</td>
-            <td width="180">
+            <td width="160">
               <input type="text" name="textfield">
                 <span id="textfield_span"></span>
             </td>
           </tr>
           <tr valign="top">
             <td width="86" align="right">信息内容:</td>
-            <td width="180">
+            <td width="160">
               <textarea name="textfield2"></textarea>
             </td>
           </tr>
